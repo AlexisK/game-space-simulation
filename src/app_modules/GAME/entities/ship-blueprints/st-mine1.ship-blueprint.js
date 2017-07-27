@@ -8,5 +8,6 @@ export var stMine1ShipBlueprint = new ShipBlueprint({
     cargo: 40000,
     sizeX: 30,
     sizeY: 30,
-    production: [oreProduction]
+    production: [oreProduction],
+    dockSize: 10
 });

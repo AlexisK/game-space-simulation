@@ -5,6 +5,11 @@ export class SimulationActor extends Actor {
         super();
         this.actor  = null;
         this.sector = null;
+        this.isExecutingAi = false;
+        this.aiPackage = null;
+        this.currentAiScript = null;
+        this.aiActionIndex = 0;
+        this.aiStack = {};
         this.x      = 0;
         this.y      = 0;
         this.angle = 0;
@@ -24,5 +29,31 @@ export class SimulationActor extends Actor {
             x : this.x + Math.cos(angle) * distance,
             y : this.y + Math.sin(angle) * distance
         };
+    }
+
+    tick() {
+        if ( this.isExecutingAi ) {
+            this.currentAiScript();
+        } else if (this.aiPackage) {
+            this.aiPackage.run(this);
+        }
+    }
+
+    stopExecutingAi() {
+        this.isExecutingAi = false;
+    }
+
+    executeAi(worker) {
+        this.currentAiScript = () => {
+            worker(this.stopExecutingAi.bind(this));
+        };
+        this.isExecutingAi = true;
+    }
+    executeAiOnce(worker) {
+        this.currentAiScript = () => {
+            worker(this.stopExecutingAi.bind(this));
+            this.currentAiScript = () => {};
+        };
+        this.isExecutingAi = true;
     }
 }

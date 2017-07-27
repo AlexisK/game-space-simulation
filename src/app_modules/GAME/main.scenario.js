@@ -1,6 +1,7 @@
 import { Sector, Ship } from 'GAME/classes';
 import { s0_0SectorBlueprint } from './entities/sector-blueprints';
 import * as shipBlueprints from './entities/ship-blueprints';
+import * as aiPackages from './entities/ai-packages';
 
 function tick(stack) {
     stack.SECTOR.actors.forEach(actor => {
@@ -24,16 +25,12 @@ export const mainScenario = function () {
             x     : parseInt(Math.random() * stack.SECTOR.blueprint.sizeX),
             y     : parseInt(Math.random() * stack.SECTOR.blueprint.sizeY)
         });
+        newShip.aiPackage = aiPackages.traderAiPackage;
         ships.push(newShip);
     }
 
     let int = setInterval(() => {
         tick(stack);
-        ships.forEach(ship => {
-            if ( !ship.target ) {
-                ship.target = stack.SECTOR.actors[parseInt(Math.random() * stack.SECTOR.actors.length)];
-            }
-        });
     }, 15);
     //setTimeout(() => clearInterval(int), 100);
     return stack;

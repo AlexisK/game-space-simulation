@@ -6,7 +6,7 @@ export var stAlloyFactory1ShipBlueprint = new ShipBlueprint({
     name: 'Alloy Melting Factory',
     shipType: stShipType,
     cargo: 80000,
-    sizeX: 64,
-    sizeY: 26,
+    sizeX: 120,
+    sizeY: 40,
     production: [alloyProduction]
 });
