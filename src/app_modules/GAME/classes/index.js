@@ -4,4 +4,6 @@ export * from './ware.class';
 export * from './production.class';
 export * from './ship-type.class';
 export * from './ship-blueprint.class';
+export * from './ship.class';
+export * from './sector-blueprint.class';
 export * from './sector.class';

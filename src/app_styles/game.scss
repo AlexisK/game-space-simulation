@@ -1,0 +1,19 @@
+@import "globals";
+
+.gamefield {
+  position: relative;
+  margin: 0 auto;
+  background: #111;
+
+  .ship {
+    position: absolute;
+    .body {
+      background-color: #ddd;
+      width: 1px; height: 1px;
+    }
+
+    &.ST .body {
+      border-radius: 50%;
+    }
+  }
+}
