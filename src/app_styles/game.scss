@@ -7,13 +7,31 @@
 
   .ship {
     position: absolute;
+    //transition: all .2s;
+
     .body {
       background-color: #ddd;
       width: 1px; height: 1px;
     }
 
+    .label {
+      display: none;
+      position: absolute;
+      bottom: 100%; left: 0;
+      margin: 5px -5px;
+      padding: 5px;
+      background-color: #333;
+      color: #fff;
+      font-size: 12px;
+    }
+    &:hover .label {
+      display: block;
+    }
+
     &.ST .body {
       border-radius: 50%;
+      border: 4px solid #ccc;
+      box-shadow: 0 0 10px #000;
     }
   }
 }

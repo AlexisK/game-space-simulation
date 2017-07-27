@@ -7,10 +7,14 @@ export class Sector {
     }
 
     init() {
-        this.blueprint.ships.forEach(rules => {
-            let newActor = new Ship(rules.actor);
-            Object.assign(newActor, rules);
-            this.actors.push(newActor);
-        });
+        this.blueprint.ships.forEach(this.createShip.bind(this));
+    }
+
+    createShip(rules) {
+        let newActor = new Ship(rules.actor);
+        Object.assign(newActor, rules);
+        newActor.sector = this;
+        this.actors.push(newActor);
+        return newActor;
     }
 }

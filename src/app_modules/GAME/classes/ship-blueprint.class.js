@@ -6,6 +6,7 @@ export class ShipBlueprint {
         this.speed = 0;
         this.sizeX = 2;
         this.sizeY = 2;
+        this.production = [];
         Object.assign(this, params);
     }
 }

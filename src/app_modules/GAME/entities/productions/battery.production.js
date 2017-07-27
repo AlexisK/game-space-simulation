@@ -4,5 +4,5 @@ import {batteryWare} from '../wares';
 export const batteryProduction = new Production({
     input: [],
     output: [[batteryWare, 1]],
-    time: 5
+    time: 3
 });
