@@ -4,6 +4,7 @@ import * as shipBlueprints from './entities/ship-blueprints';
 import * as aiPackages from './entities/ai-packages';
 
 function tick(stack) {
+    stack.SECTOR.tick();
     stack.SECTOR.actors.forEach(actor => {
         actor.tick();
     });
@@ -19,7 +20,7 @@ export const mainScenario = function () {
 
     let ships = [];
 
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 2; i++) {
         let newShip = stack.SECTOR.createShip({
             actor : shipBlueprints.p1ShipBlueprint,
             x     : parseInt(Math.random() * stack.SECTOR.blueprint.sizeX),

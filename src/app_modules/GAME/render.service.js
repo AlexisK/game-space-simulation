@@ -33,4 +33,11 @@ export function render(stack, node) {
         ship.element.style.bottom = ship.y - (ship.blueprint.sizeY/2) + 'px';
         ship.element.body.style.transform = ['rotate(', 'rad)'].join(-ship.angle);
     });
+
+    stack.SECTOR.removed.forEach(ship => {
+        if ( ship.element ) {
+            node.removeChild(ship.element);
+            delete ship.element;
+        }
+    })
 }

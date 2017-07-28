@@ -6,14 +6,10 @@ export const moveToAiAction = new AiAction((self, ship, params) => {
         if ( typeof(target) === 'function' ) {
             target = target(self, ship, params);
         }
+        ship.target = target;
         ship.executeAi((finish) => {
-            ship.target = target;
-            ship.angle = ship.getAngle(ship.target);
-            let distance = ship.getDistance(ship.target);
-            if ( distance < ship.blueprint.speed * 2 ) {
+            if ( ship.moveTo(ship.target) ) {
                 finish();
-            } else {
-                Object.assign(ship, ship.calcCordsByTargetAndDistance(ship.target, ship.blueprint.speed));
             }
         });
     }

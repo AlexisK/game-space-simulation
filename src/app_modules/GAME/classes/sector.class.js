@@ -1,16 +1,22 @@
-import {Ship} from './ship.class';
+import { removeFromList } from 'utils/helpers';
+import { Ship } from './ship.class';
 
 export class Sector {
     constructor(blueprint) {
         this.blueprint = blueprint;
-        this.actors = [];
-        this.ships = [];
-        this.stations = [];
-        this.docks = [];
+        this.actors    = [];
+        this.ships     = [];
+        this.stations  = [];
+        this.docks     = [];
+        this.removed   = [];
     }
 
     init() {
         this.blueprint.ships.forEach(this.createShip.bind(this));
+    }
+
+    tick () {
+        this.removed.length = 0;
     }
 
     getActorsByType(type) {
@@ -20,13 +26,18 @@ export class Sector {
     createShip(rules) {
         let newActor = new Ship(rules.actor);
         Object.assign(newActor, rules);
-        newActor.sector = this;
         this.registerActor(newActor);
 
         return newActor;
     }
 
-    registerActor(actor) {
+    registerActor(actor, target) {
+        actor._registerInSector(this);
+        if ( target ) {
+            actor.x = target.x;
+            actor.y = target.y;
+        }
+
         this.actors.push(actor);
         if ( actor.isStation ) {
             this.stations.push(actor);
@@ -35,6 +46,16 @@ export class Sector {
             }
         } else {
             this.ships.push(actor);
+        }
+    }
+
+    unregisterActor(actor) {
+        if ( removeFromList(this.actors, actor) ) {
+            removeFromList(this.ships, actor);
+            removeFromList(this.stations, actor);
+            removeFromList(this.docks, actor);
+            this.removed.push(actor);
+            actor._unregisterInSector();
         }
     }
 }

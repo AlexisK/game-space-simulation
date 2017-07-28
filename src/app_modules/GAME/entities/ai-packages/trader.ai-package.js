@@ -12,7 +12,7 @@ export const traderAiPackage = new AiPackage({
             }
         }],
         [waitAiAction, {
-            time : () => parseInt(Math.random() * 4000) + 1000
+            time : () => parseInt(Math.random() * 4) + 1000
         }]
     ]
 });

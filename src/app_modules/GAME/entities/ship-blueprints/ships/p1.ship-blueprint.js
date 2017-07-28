@@ -6,6 +6,6 @@ export var p1ShipBlueprint = new ShipBlueprint({
     shipType: pShipType,
     cargo: 10,
     speed: 5,
-    sizeX: 10,
-    sizeY: 2
+    sizeX: 12,
+    sizeY: 4
 });
