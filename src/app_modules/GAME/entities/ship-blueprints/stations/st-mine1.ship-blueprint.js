@@ -1,6 +1,6 @@
 import {ShipBlueprint} from 'GAME/classes';
 import {stShipType} from 'GAME/entities/ship-types';
-import {oreProduction} from 'GAME/entities/productions';
+import {oreProductionBlueprint} from 'GAME/entities/production-blueprints';
 
 export var stMine1ShipBlueprint = new ShipBlueprint({
     name: 'Mine',
@@ -8,6 +8,6 @@ export var stMine1ShipBlueprint = new ShipBlueprint({
     cargo: 40000,
     sizeX: 60,
     sizeY: 60,
-    production: [oreProduction],
+    production: [oreProductionBlueprint],
     dockSize: 10
 });

@@ -22,6 +22,16 @@ export class Actor {
         };
     }
 
+    moveTo(target, desiredDistance) {
+        this.angle   = this.getAngle(target);
+        let distance = this.getDistance(target);
+        if ( distance < desiredDistance ) {
+            return true;
+        }
+        Object.assign(this, this.calcCordsByTargetAndDistance(target, this.blueprint.speed));
+        return false;
+    }
+
     _registerInSector(sector) {
         this.sector = sector;
     }

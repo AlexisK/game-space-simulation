@@ -1,4 +1,5 @@
-import { Sector, Ship } from 'GAME/classes';
+import {config} from 'GAME/config';
+import { Sector } from 'GAME/classes';
 import { s0_0SectorBlueprint } from './entities/sector-blueprints';
 import * as shipBlueprints from './entities/ship-blueprints';
 import * as aiPackages from './entities/ai-packages';
@@ -37,7 +38,7 @@ export const mainScenario = function () {
 
     let int = setInterval(() => {
         tick(stack);
-    }, 15);
+    }, config.tickTimeframe);
     //setTimeout(() => clearInterval(int), 2000);
     return stack;
 };

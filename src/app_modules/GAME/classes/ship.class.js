@@ -1,15 +1,19 @@
 import { SimulationActor } from './simulation-actor.class';
+import { Production } from './production.class';
 import {config} from 'GAME/config';
 import {removeFromList} from 'utils/helpers';
 
 export class Ship extends SimulationActor {
     constructor(blueprint) {
         super();
+        this.inventory = [];
         this.docked    = [];
         this.aiPackage = null;
         this.target    = null;
         this.blueprint = blueprint;
         this.dockedTo  = null;
+        this.production = this.blueprint.production.map(bp => new Production(bp));
+        this.production.forEach(production => production.ship = this);
         this.normalize();
     }
 
@@ -23,6 +27,11 @@ export class Ship extends SimulationActor {
     tick() {
         super.tick();
         this.docked.forEach(ship => ship.tick());
+        this.production.forEach(production => production.tick());
+    }
+
+    moveTo(target, distance = this.blueprint.speed) {
+        return super.moveTo(target, distance);
     }
 
     requestDock(ship) {
@@ -40,16 +49,6 @@ export class Ship extends SimulationActor {
             ship._undock(this.sector);
             this.hasDockingSpace = this.docked.length < this.blueprint.dockSize;
         }
-    }
-
-    moveTo(target, desiredDistance = this.blueprint.speed) {
-        this.angle   = this.getAngle(target);
-        let distance = this.getDistance(target);
-        if ( distance < desiredDistance ) {
-            return true;
-        }
-        Object.assign(this, this.calcCordsByTargetAndDistance(target, this.blueprint.speed));
-        return false;
     }
 
     dockTo(target) {

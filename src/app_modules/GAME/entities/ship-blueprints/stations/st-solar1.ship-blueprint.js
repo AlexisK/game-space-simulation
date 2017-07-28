@@ -1,6 +1,6 @@
 import {ShipBlueprint} from 'GAME/classes';
 import {stShipType} from 'GAME/entities/ship-types';
-import {batteryProduction} from 'GAME/entities/productions';
+import {batteryProductionBlueprint} from 'GAME/entities/production-blueprints';
 
 export var stSolar1ShipBlueprint = new ShipBlueprint({
     name: 'Solar Factory',
@@ -8,5 +8,5 @@ export var stSolar1ShipBlueprint = new ShipBlueprint({
     cargo: 10000,
     sizeX: 120,
     sizeY: 120,
-    production: [batteryProduction]
+    production: [batteryProductionBlueprint]
 });
