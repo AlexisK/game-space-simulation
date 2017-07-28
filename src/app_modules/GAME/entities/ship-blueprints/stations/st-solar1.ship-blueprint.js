@@ -6,7 +6,7 @@ export var stSolar1ShipBlueprint = new ShipBlueprint({
     name: 'Solar Factory',
     shipType: stShipType,
     cargo: 10000,
-    sizeX: 60,
-    sizeY: 60,
+    sizeX: 120,
+    sizeY: 120,
     production: [batteryProduction]
 });

@@ -5,7 +5,7 @@ export var t1ShipBlueprint = new ShipBlueprint({
     name: 'Transport Heavy',
     shipType: tShipType,
     cargo: 500,
-    speed: 1,
+    speed: 0.5,
     sizeX: 80,
     sizeY: 20,
     dockSize: 5

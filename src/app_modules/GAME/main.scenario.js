@@ -32,8 +32,8 @@ export const mainScenario = function () {
     stack.SECTOR.init();
 
     createAmountOfShips(stack, shipBlueprints.t1ShipBlueprint, aiPackages.wandererAiPackage, 2);
-    createAmountOfShips(stack, shipBlueprints.p1ShipBlueprint, aiPackages.wandererAiPackage, 5);
-    createAmountOfShips(stack, shipBlueprints.p1ShipBlueprint, aiPackages.traderAiPackage, 20);
+    createAmountOfShips(stack, shipBlueprints.f1ShipBlueprint, aiPackages.patrolAiPackage, 3);
+    createAmountOfShips(stack, shipBlueprints.p1ShipBlueprint, aiPackages.traderAiPackage, 30);
 
     let int = setInterval(() => {
         tick(stack);

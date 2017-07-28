@@ -5,7 +5,7 @@ export var stDock1ShipBlueprint = new ShipBlueprint({
     name: 'Dock',
     shipType: stShipType,
     cargo: 5000,
-    sizeX: 16,
-    sizeY: 16,
+    sizeX: 30,
+    sizeY: 30,
     dockSize: 10
 });
