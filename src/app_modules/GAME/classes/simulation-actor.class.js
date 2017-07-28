@@ -24,16 +24,16 @@ export class SimulationActor extends Actor {
     }
 
     executeAi(worker) {
+        this.isExecutingAi = true;
         this.currentAiScript = () => {
             worker(this.stopExecutingAi.bind(this));
         };
-        this.isExecutingAi = true;
     }
     executeAiOnce(worker) {
+        this.isExecutingAi = true;
         this.currentAiScript = () => {
             worker(this.stopExecutingAi.bind(this));
             this.currentAiScript = () => {};
         };
-        this.isExecutingAi = true;
     }
 }

@@ -19,6 +19,11 @@ export class Ship extends SimulationActor {
         this.isStation       = this.blueprint.speed === 0;
     }
 
+    tick() {
+        super.tick();
+        this.docked.forEach(ship => ship.tick());
+    }
+
     requestDock(ship) {
         if ( this.hasDockingSpace && this.getDistance(ship) <= config.dockingDistance ) {
             this.docked.push(ship);

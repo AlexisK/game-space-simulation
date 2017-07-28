@@ -20,7 +20,7 @@ export const mainScenario = function () {
 
     let ships = [];
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 10; i++) {
         let newShip = stack.SECTOR.createShip({
             actor : shipBlueprints.p1ShipBlueprint,
             x     : parseInt(Math.random() * stack.SECTOR.blueprint.sizeX),
@@ -33,6 +33,6 @@ export const mainScenario = function () {
     let int = setInterval(() => {
         tick(stack);
     }, 15);
-    //setTimeout(() => clearInterval(int), 100);
+    //setTimeout(() => clearInterval(int), 2000);
     return stack;
 };

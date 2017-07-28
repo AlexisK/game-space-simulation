@@ -11,7 +11,7 @@ export class Actor {
     }
 
     getDistance(target) {
-        return Math.sqrt(Math.pow(this.target.x - this.x, 2) + Math.pow(this.target.y - this.y, 2));
+        return Math.sqrt(Math.pow(target.x - this.x, 2) + Math.pow(target.y - this.y, 2));
     }
 
     calcCordsByTargetAndDistance(target, distance) {
