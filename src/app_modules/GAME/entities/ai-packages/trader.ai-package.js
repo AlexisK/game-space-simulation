@@ -1,6 +1,6 @@
 import { AiPackage } from 'GAME/classes';
 import * as aiAction from 'GAME/entities/ai-actions';
-import { stShipType } from 'GAME/entities/ship-types';
+import {config} from 'GAME/config';
 
 export const traderAiPackage = new AiPackage({
     actions : [
@@ -9,11 +9,12 @@ export const traderAiPackage = new AiPackage({
                 let targets = ship.sector.docks;
                 if ( !targets.length ) { return [ship]; }
                 return targets[parseInt(Math.random() * targets.length)];
-            }
+            },
+            distance: config.followDistance
         }],
         [aiAction.dockToAiAction],
         [aiAction.waitAiAction, {
-            time : () => parseInt(Math.random() * 4) + 1000
+            time : () => parseInt(Math.random() * 4000) + 1000
         }],
         [aiAction.undockAiAction]
     ]

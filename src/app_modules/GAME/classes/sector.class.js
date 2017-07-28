@@ -41,11 +41,11 @@ export class Sector {
         this.actors.push(actor);
         if ( actor.isStation ) {
             this.stations.push(actor);
-            if ( actor.hasDock ) {
-                this.docks.push(actor);
-            }
         } else {
             this.ships.push(actor);
+        }
+        if ( actor.hasDock ) {
+            this.docks.push(actor);
         }
     }
 

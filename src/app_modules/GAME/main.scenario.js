@@ -11,24 +11,29 @@ function tick(stack) {
     stack.onTick(stack);
 }
 
+function createAmountOfShips(stack, type, ai, amount) {
+    for (let i = 0; i < amount; i++) {
+        let newShip = stack.SECTOR.createShip({
+            actor : type,
+            x     : parseInt(Math.random() * stack.SECTOR.blueprint.sizeX),
+            y     : parseInt(Math.random() * stack.SECTOR.blueprint.sizeY)
+        });
+        newShip.aiPackage = ai;
+        stack.ships.push(newShip);
+    }
+}
+
 export const mainScenario = function () {
     var stack = {
         SECTOR : new Sector(s0_0SectorBlueprint),
+        ships: [],
         onTick : () => {}
     };
     stack.SECTOR.init();
 
-    let ships = [];
-
-    for (let i = 0; i < 10; i++) {
-        let newShip = stack.SECTOR.createShip({
-            actor : shipBlueprints.p1ShipBlueprint,
-            x     : parseInt(Math.random() * stack.SECTOR.blueprint.sizeX),
-            y     : parseInt(Math.random() * stack.SECTOR.blueprint.sizeY)
-        });
-        newShip.aiPackage = aiPackages.traderAiPackage;
-        ships.push(newShip);
-    }
+    createAmountOfShips(stack, shipBlueprints.t1ShipBlueprint, aiPackages.wandererAiPackage, 2);
+    createAmountOfShips(stack, shipBlueprints.p1ShipBlueprint, aiPackages.wandererAiPackage, 5);
+    createAmountOfShips(stack, shipBlueprints.p1ShipBlueprint, aiPackages.traderAiPackage, 20);
 
     let int = setInterval(() => {
         tick(stack);

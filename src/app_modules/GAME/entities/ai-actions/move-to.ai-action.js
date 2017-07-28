@@ -5,7 +5,7 @@ export const moveToAiAction = new AiAction((self, ship, params) => {
     if ( target ) {
         ship.target = target;
         ship.executeAi((finish) => {
-            if ( ship.moveTo(ship.target) ) {
+            if ( ship.moveTo(ship.target, params['distance']) ) {
                 finish();
             }
         });
