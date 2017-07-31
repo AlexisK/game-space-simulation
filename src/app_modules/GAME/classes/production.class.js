@@ -46,7 +46,7 @@ export class Production {
                 this.ship.inventory.push([list[i][0],list[i][1]]);
             }
         }
-        console.log(this.ship.inventory);
+        //console.log(this.ship.inventory);
     }
 
     hasResources() {
