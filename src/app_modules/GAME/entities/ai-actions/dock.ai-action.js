@@ -6,13 +6,13 @@ export const dockToAiAction = new AiAction((self, ship, params) => {
     if ( target ) {
         ship.target = target;
         ship.executeAi((finish) => {
-            if ( target.hasDockingSpace ) {
-                ship.moveTo(target);
-                if ( ship.dockTo(target) ) {
+            if ( ship.target.hasDockingSpace ) {
+                ship.moveTo(ship.target);
+                if ( ship.dockTo(ship.target) ) {
                     finish();
                 }
             } else {
-                ship.moveTo(target, config.followDistance + target.followOffset);
+                ship.moveTo(ship.target, config.followDistance + target.followOffset);
             }
         });
     }

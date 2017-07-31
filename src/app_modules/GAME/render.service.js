@@ -1,3 +1,16 @@
+function createBlock(block) {
+    let element       = document.createElement('div');
+    element.className = 'block ' + block.ship.blueprint.shipType.code;
+
+    element.style.width = block.blueprint.sizeX + 'px';
+    element.style.height = block.blueprint.sizeY + 'px';
+    element.style.left           = block.x - (block.blueprint.sizeX / 2) + 'px';
+    element.style.bottom         = block.y - (block.blueprint.sizeY / 2) + 'px';
+    element.style.transform = ['rotate(', 'rad)'].join(-block.angle);
+
+    return element;
+}
+
 function createActor(actor) {
     let element       = document.createElement('div');
     element.className = 'ship ' + actor.blueprint.shipType.code;
@@ -11,11 +24,10 @@ function createActor(actor) {
     element.label.textContent = actor.blueprint.name;
     element.appendChild(element.label);
 
-    element.style.width = element.body.style.width = actor.blueprint.sizeX + 'px';
-    element.style.height = element.body.style.height = actor.blueprint.sizeY + 'px';
-    if ( actor.isStation ) {
-        element.body.style.borderRadius = Math.min(actor.blueprint.sizeX, actor.blueprint.sizeY) / 2 + 'px';
-    }
+    actor.blocks.forEach(block => {
+        let blockElement = createBlock(block);
+        element.body.appendChild(blockElement);
+    });
 
     return element;
 }
@@ -31,9 +43,9 @@ export function render(stack, node) {
             ship.element = createActor(ship);
             node.appendChild(ship.element);
         }
-        ship.element.style.left           = ship.x - (ship.blueprint.sizeX / 2) + 'px';
-        ship.element.style.bottom         = ship.y - (ship.blueprint.sizeY / 2) + 'px';
-        ship.element.body.style.transform = ['rotate(', 'rad)'].join( -ship.angle );
+        ship.element.style.left           = ship.x + 'px';
+        ship.element.style.bottom         = ship.y + 'px';
+        ship.element.body.style.transform = ['rotate(', 'rad)'].join(-ship.angle);
     });
 
     stack.SECTOR.removed.forEach(ship => {

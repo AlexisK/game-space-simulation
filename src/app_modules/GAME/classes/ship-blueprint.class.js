@@ -8,6 +8,7 @@ export class ShipBlueprint {
         this.sizeY = 2;
         this.dockSize  = 0;
         this.production = [];
+        this.blocks = [];
         Object.assign(this, params);
     }
 }
