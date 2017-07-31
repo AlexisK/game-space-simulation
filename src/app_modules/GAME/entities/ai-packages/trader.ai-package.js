@@ -10,7 +10,7 @@ export const traderAiPackage = new AiPackage({
                 if ( !targets.length ) { return [ship]; }
                 return targets[parseInt(Math.random() * targets.length)];
             },
-            distance: config.followDistance
+            distance: config.dockingRequestDistance
         }],
         [aiAction.dockToAiAction],
         [aiAction.waitAiAction, {

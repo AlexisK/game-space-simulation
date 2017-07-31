@@ -1,5 +1,6 @@
 export const config = {
     dockingDistance: 10,
-    followDistance: 40,
+    dockingRequestDistance: 200,
+    followDistance: 100,
     tickTimeframe: 15
 };

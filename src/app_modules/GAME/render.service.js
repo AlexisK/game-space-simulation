@@ -1,6 +1,6 @@
 function createBlock(block) {
     let element       = document.createElement('div');
-    element.className = 'block ' + block.ship.blueprint.shipType.code;
+    element.className = 'block ' + block.blueprint.cls;
 
     element.style.width = block.blueprint.sizeX + 'px';
     element.style.height = block.blueprint.sizeY + 'px';

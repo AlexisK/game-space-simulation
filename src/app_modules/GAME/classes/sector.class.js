@@ -1,5 +1,6 @@
 import { removeFromList } from 'utils/helpers';
 import { Ship } from './ship.class';
+import { Block } from './block.class';
 
 export class Sector {
     constructor(blueprint) {
@@ -13,6 +14,16 @@ export class Sector {
 
     init() {
         this.blueprint.ships.forEach(this.createShip.bind(this));
+    }
+
+    getTarget(target) {
+        if ( target instanceof Block) {
+            return {
+                x: (Math.cos(-target.ship.angle) * target.x - Math.sin(-target.ship.angle) * target.y) + target.ship.x,
+                y: (Math.cos(target.ship.angle) * target.y + Math.sin(target.ship.angle) * target.x) + target.ship.y
+            };
+        }
+        return target;
     }
 
     tick () {
@@ -32,6 +43,7 @@ export class Sector {
     }
 
     registerActor(actor, target) {
+        target = this.getTarget(target);
         actor._registerInSector(this);
         if ( target ) {
             actor.x = target.x;

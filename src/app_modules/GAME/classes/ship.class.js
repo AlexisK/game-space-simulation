@@ -43,6 +43,7 @@ export class Ship extends SimulationActor {
         this.hasDockingSpace = this.docked.length < this.docksTotalSize;
         this.isStation       = this.blueprint.speed === 0;
         this.followOffset = Math.max(this.blueprint.sizeX, this.blueprint.sizeY) / 2;
+        this.dockRequestOffset = this.followOffset + config.dockingRequestDistance;
     }
 
 
@@ -57,22 +58,26 @@ export class Ship extends SimulationActor {
     }
 
     requestDock(ship) {
-        if ( this.hasDockingSpace && this.getDistance(ship) <= config.dockingDistance ) {
+        if ( this.hasDockingSpace && this.getDistance(ship) <= this.dockRequestOffset ) {
             for ( let i = 0; i < this.blocksWithDocks.length; i++ ) {
-                if ( this.blocksWithDocks[i].requestDock(ship) ) {
-                    this.docked.push(ship);
-                    this.hasDockingSpace = this.docked.length < this.docksTotalSize;
-                    return true;
+                if ( this.blocksWithDocks[i].hasDockingSpace ) {
+                    ship.target = this.blocksWithDocks[i];
+                    this.blocksWithDocks.push(this.blocksWithDocks.shift());
+                    return false;
                 }
             }
             return false;
         }
     }
 
-    requestUndock(ship) {
-        if ( removeFromList(this.docked, ship) ) {
-            this.hasDockingSpace = this.docked.length < this.blueprint.dockSize;
-        }
+    _requestDock(ship) {
+        this.docked.push(ship);
+        this.hasDockingSpace = this.docked.length < this.docksTotalSize;
+    }
+
+    _requestUndock(ship) {
+        removeFromList(this.docked, ship);
+        this.hasDockingSpace = this.docked.length < this.docksTotalSize;
     }
 
     dockTo(target) {

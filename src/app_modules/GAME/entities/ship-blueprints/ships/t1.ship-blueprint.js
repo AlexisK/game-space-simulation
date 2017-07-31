@@ -11,6 +11,7 @@ export var t1ShipBlueprint = new ShipBlueprint({
     sizeY: 20,
     dockSize: 5,
     blocks: [
-        [blockBlueprints.HullT1BlockBlueprint,0,0,0]
+        [blockBlueprints.HullT1BlockBlueprint,0,0,0],
+        [blockBlueprints.Dock1BlockBlueprint,-50,0,0]
     ]
 });

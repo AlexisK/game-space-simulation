@@ -1,4 +1,4 @@
-import {AiAction} from 'GAME/classes';
+import {AiAction, Block} from 'GAME/classes';
 import {config} from 'GAME/config';
 
 export const dockToAiAction = new AiAction((self, ship, params) => {
@@ -12,6 +12,9 @@ export const dockToAiAction = new AiAction((self, ship, params) => {
                     finish();
                 }
             } else {
+                if ( ship.target instanceof Block ) {
+                    ship.target = ship.target.ship;
+                }
                 ship.moveTo(ship.target, config.followDistance + target.followOffset);
             }
         });

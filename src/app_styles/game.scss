@@ -7,24 +7,33 @@
 
   .ship {
     position: absolute;
-    width: 1px; height: 1px;
+    width: 1px;
+    height: 1px;
     //border: 50px solid rgba(255,0,0,.2);
     //transition: all .2s;
 
     .block {
       position: absolute;
-        background-color: #bbb;
+      background-color: #bbb;
+      box-shadow: 0 0 10px #000;
+
+      &.dock1 {
+        border-radius: 50%;
+        border: 8px solid #777;
+      }
     }
 
     .body {
       position: relative;
-      width: 1px; height: 1px;
+      width: 1px;
+      height: 1px;
     }
 
     .label {
       display: none;
       position: absolute;
-      bottom: 100%; left: 0;
+      bottom: 100%;
+      left: 0;
       margin: 5px -5px;
       padding: 5px;
       background-color: #333;
@@ -34,20 +43,5 @@
     &:hover .label {
       display: block;
     }
-
-    &.P .block {
-      background-color: #ccc;
-    }
-    &.F .block {
-      background-color: #ccab8a;
-    }
-
-    &.ST .block {
-      border: 4px solid #999;
-      box-shadow: 0 0 10px #000;
-      background-color: #aaa;
-    }
-
-
   }
 }

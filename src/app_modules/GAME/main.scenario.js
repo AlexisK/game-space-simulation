@@ -39,6 +39,6 @@ export const mainScenario = function () {
     let int = setInterval(() => {
         tick(stack);
     }, config.tickTimeframe);
-    setTimeout(() => clearInterval(int), 3000);
+    //setTimeout(() => clearInterval(int), 3000);
     return stack;
 };

@@ -7,8 +7,6 @@ export var stAlloyFactory1ShipBlueprint = new ShipBlueprint({
     name: 'Alloy Melting Factory',
     shipType: stShipType,
     cargo: 80000,
-    sizeX: 240,
-    sizeY: 80,
     production: [alloyProductionBlueprint],
     blocks: [
         [blockBlueprints.ProductionAlloy1BlockBlueprint,0,0,0],
