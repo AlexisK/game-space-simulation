@@ -27,7 +27,9 @@ const PATH = [
 const proxyRules = {};
 
 const sassLoaders = [
-    'css-loader',
+    'css-loader?sourceMap',
+    'postcss-loader?sourceMap',
+    'resolve-url-loader',
     'sass-loader?includePaths[]=' + [PATH.source('app_styles', 'globals')]
 ];
 
@@ -74,7 +76,7 @@ module.exports = (process_env) => {
         },
         {
             test   : /\.(png|jpe?g|gif|svg|woff2?|ttf|eot|ico)$/,
-            loader : 'file?name=static/[name].[hash].[ext]?'
+            loader : 'file-loader?name=static/[name].[hash].[ext]?'
         }
     ];
 

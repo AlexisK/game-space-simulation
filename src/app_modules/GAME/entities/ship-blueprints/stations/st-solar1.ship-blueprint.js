@@ -10,7 +10,7 @@ export var stSolar1ShipBlueprint = new ShipBlueprint({
     production : [batteryProductionBlueprint],
     blocks     : [
         [blockBlueprints.ProductionSolar1BlockBlueprint, 0, 0, 0],
-        [blockBlueprints.Dock1BlockBlueprint, -60, 0, 0],
-        [blockBlueprints.Dock1BlockBlueprint, 60, 0, 0]
+        [blockBlueprints.Dock1BlockBlueprint, -120, 0, Math.PI],
+        [blockBlueprints.Dock1BlockBlueprint, 120, 0, 0]
     ]
 });

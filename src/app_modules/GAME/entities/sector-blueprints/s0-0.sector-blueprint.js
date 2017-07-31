@@ -9,7 +9,7 @@ export var s0_0SectorBlueprint = new SectorBlueprint({
         // Solar Station
         {x : 300, y : 500, actor : shipBlueprints.stSolar1ShipBlueprint},
 
-        {x : 1700, y : 500, actor : shipBlueprints.stMine1ShipBlueprint},
+        {x : 1700, y : 590, actor : shipBlueprints.stMine1ShipBlueprint},
         {x : 1650, y : 430, actor : shipBlueprints.stMine1ShipBlueprint},
 
         {x : 700, y : 1300, actor : shipBlueprints.stAlloyFactory1ShipBlueprint},

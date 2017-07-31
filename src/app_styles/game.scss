@@ -15,11 +15,34 @@
     .block {
       position: absolute;
       background-color: #bbb;
-      box-shadow: 0 0 10px #000;
+
+      &.ship-small-1 {
+        background: transparent url('assets/shipparts/small-1.png');
+      }
+
+      &.hull-med-front {
+        background: transparent url('assets/shipparts/body-med-cockpit.png');
+      }
+
+      &.hull-med-middle {
+        background: transparent url('assets/shipparts/body-med-middle.png');
+      }
+
+      &.hull-med-back {
+        background: transparent url('assets/shipparts/body-med-back.png');
+      }
+
+      &.cargo-med {
+        background: transparent url('assets/shipparts/cargo-med.png');
+      }
 
       &.dock1 {
+        background: transparent url('assets/shipparts/dock-1.png');
+      }
+
+      &.production-solar1 {
         border-radius: 50%;
-        border: 8px solid #777;
+        border: 8px solid #aaa;
       }
     }
 

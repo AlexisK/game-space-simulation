@@ -6,9 +6,7 @@ export var p1ShipBlueprint = new ShipBlueprint({
     name: 'Ship',
     shipType: pShipType,
     cargo: 10,
-    speed: 4,
-    sizeX: 12,
-    sizeY: 4,
+    speed: 6,
     blocks: [
         [blockBlueprints.HullP1BlockBlueprint,0,0,0]
     ]
