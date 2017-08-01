@@ -10,7 +10,7 @@ export var stAlloyFactory1ShipBlueprint = new ShipBlueprint({
     production: [alloyProductionBlueprint],
     blocks: [
         [blockBlueprints.ProductionAlloy1BlockBlueprint,0,0,0],
-        [blockBlueprints.Dock1BlockBlueprint, 0, -40, -Math.PI/2],
-        [blockBlueprints.Dock1BlockBlueprint, 0, 40, Math.PI/2]
+        [blockBlueprints.Dock1BlockBlueprint, 0, -3, -Math.PI/2],
+        [blockBlueprints.Dock1BlockBlueprint, 0, 3, Math.PI/2]
     ]
 });

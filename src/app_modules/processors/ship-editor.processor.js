@@ -95,8 +95,8 @@ function createOverlay(stack, node) {
         if ( stack.currentBlock ) {
             stack.addBlock([
                 stack.currentBlock,
-                stack.cursorX + stack.currentBlock.sizeX/2 - stack.SECTOR.blueprint.sizeX / 2,
-                stack.cursorY + stack.currentBlock.sizeY/2 - stack.SECTOR.blueprint.sizeY / 2,
+                Math.floor((stack.cursorX + stack.currentBlock.sizeX/2 - stack.SECTOR.blueprint.sizeX / 2) / config.gridStep),
+                Math.floor((stack.cursorY + stack.currentBlock.sizeY/2 - stack.SECTOR.blueprint.sizeY / 2) / config.gridStep),
                 0
             ]);
         }

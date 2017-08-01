@@ -1,6 +1,7 @@
 import { Actor } from './actor.class';
 import { Block } from './block.class';
 import { removeFromList } from 'utils/helpers';
+import { config } from 'GAME/config';
 
 export class SimulationActor extends Actor {
     constructor() {
@@ -23,7 +24,10 @@ export class SimulationActor extends Actor {
         this.cargoTotalSize = 0;
 
         this.blueprint.blocks.forEach(([blockBlueprint, x, y, angle]) => {
-            let block = new Block(this, blockBlueprint, {x, y, angle});
+            let block = new Block(this, blockBlueprint, {
+                x: x * config.gridStep,
+                y: y * config.gridStep,
+                angle});
             this.blocks.push(block);
 
             if ( blockBlueprint.dockSize ) {

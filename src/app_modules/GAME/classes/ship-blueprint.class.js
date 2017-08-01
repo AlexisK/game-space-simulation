@@ -1,4 +1,5 @@
 import { ImageGenerator } from './image-generator.class';
+import { config } from 'GAME/config';
 
 export class ShipBlueprint {
     constructor(params) {
@@ -23,6 +24,8 @@ export class ShipBlueprint {
         let left   = 0;
 
         this.blocks.forEach(([bp, x, y, angle]) => {
+            x *= config.gridStep;
+            y *= config.gridStep;
             let x2 = bp.sizeX / 2;
             let y2 = bp.sizeY / 2;
             console.log(x, y);
@@ -35,19 +38,25 @@ export class ShipBlueprint {
         this.sizeY = top - bottom;
 
         // calc center
-        let offsetX = (right + left) / 2;
-        let offsetY = (top + bottom) / 2;
+        this.offsetX = Math.round(((right + left) / 2) / config.gridStep);
+        this.offsetY = Math.round(((top + bottom) / 2) / config.gridStep);
         this.blocks.forEach(params => {
-            params[1] -= offsetX;
-            params[2] -= offsetY;
+            params[1] -= this.offsetX;
+            params[2] -= this.offsetY;
         });
-        console.log({top, right, bottom, left, offsetX, offsetY, sizeX: this.sizeX, sizeY: this.sizeY});
 
     }
 
     createImage() {
         this.imageGenerator = new ImageGenerator(this.sizeX, this.sizeY);
-        this.blocks.map(([bp, x, y, angle]) => [bp.imageUrl, x, y, angle, bp.sizeX, bp.sizeY]).forEach(data => this.imageGenerator.addImage(data));
+        this.blocks.map(([bp, x, y, angle]) => [
+            bp.imageUrl,
+            x * config.gridStep,
+            y * config.gridStep,
+            angle,
+            bp.sizeX,
+            bp.sizeY
+        ]).forEach(data => this.imageGenerator.addImage(data));
 
         this.getImageData = new Promise(resolve => {
             this.imageGenerator.generatePng()
