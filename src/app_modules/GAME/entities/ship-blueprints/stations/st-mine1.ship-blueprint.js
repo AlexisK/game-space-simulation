@@ -11,6 +11,6 @@ export var stMine1ShipBlueprint = new ShipBlueprint({
     dockSize: 10,
     blocks: [
         [blockBlueprints.ProductionOre1BlockBlueprint,0,0,0],
-        [blockBlueprints.Dock1BlockBlueprint,-40,0,Math.PI]
+        [blockBlueprints.Dock1BlockBlueprint,-100,0,Math.PI]
     ]
 });

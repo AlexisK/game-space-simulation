@@ -1,21 +1,11 @@
-function createBlock(block) {
-    let element       = document.createElement('div');
-    element.className = 'block ' + block.blueprint.cls;
-
-    element.style.width = block.blueprint.sizeX + 'px';
-    element.style.height = block.blueprint.sizeY + 'px';
-    element.style.left           = block.x - (block.blueprint.sizeX / 2) + 'px';
-    element.style.bottom         = block.y - (block.blueprint.sizeY / 2) + 'px';
-    element.style.transform = ['rotate(', 'rad)'].join(-block.angle);
-
-    return element;
-}
 
 function createActor(actor) {
     let element       = document.createElement('div');
     element.className = 'ship ' + actor.blueprint.shipType.code;
 
-    element.body           = document.createElement('div');
+    element.body           = document.createElement('img');
+    actor.blueprint.getImageData
+        .then(({uri}) => element.body.src = uri);
     element.body.className = 'body';
     element.appendChild(element.body);
 
@@ -24,10 +14,10 @@ function createActor(actor) {
     element.label.textContent = actor.blueprint.name;
     element.appendChild(element.label);
 
-    actor.blocks.forEach(block => {
-        let blockElement = createBlock(block);
-        element.body.appendChild(blockElement);
-    });
+    element.body.style.width = actor.blueprint.sizeX + 'px';
+    element.body.style.height = actor.blueprint.sizeY + 'px';
+    element.body.style.left = -actor.blueprint.sizeX/2 + 'px';
+    element.body.style.top = -actor.blueprint.sizeY/2 + 'px';
 
     return element;
 }

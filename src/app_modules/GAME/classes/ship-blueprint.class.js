@@ -1,3 +1,5 @@
+import { ImageGenerator } from './image-generator.class';
+
 export class ShipBlueprint {
     constructor(params) {
         this.name       = null;
@@ -11,6 +13,7 @@ export class ShipBlueprint {
         this.blocks     = [];
         Object.assign(this, params);
         this.calculateBoundaries();
+        this.createImage();
     }
 
     calculateBoundaries() {
@@ -30,8 +33,18 @@ export class ShipBlueprint {
         this.sizeY = top - bottom;
     }
 
-    generateImage() {
-        let canvasElement = document.createElement('canvas');
-        let ctx = canvasElement.getContext('2d');
+    createImage() {
+        this.imageGenerator = new ImageGenerator(this.sizeX, this.sizeY);
+        this.blocks.map(([bp, x, y, angle]) => [bp.imageUrl, x, y, angle]).forEach(data => this.imageGenerator.addImage(data));
+
+        this.getImageData = new Promise(resolve => {
+            this.imageGenerator.generatePng()
+                .then(uri => {
+                    this.imageUri = uri;
+                    resolve({uri: this.imageUri});
+                    //console.log(this.name, '\n', uri);
+                });
+        });
+
     }
 }

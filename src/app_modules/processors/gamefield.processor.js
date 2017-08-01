@@ -1,6 +1,6 @@
 import { Processor } from 'core/classes';
 import { mainScenario } from 'GAME/main.scenario';
-import { render } from 'GAME/render.service';
+import { render } from 'GAME/render2.service';
 
 export var GamefieldProcessor = new Processor({
     name : 'gamefield',

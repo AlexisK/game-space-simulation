@@ -1,3 +1,4 @@
+export * from './image-generator.class';
 export * from './actor.class';
 export * from './simulation-actor.class';
 export * from './actor-ai.class';
