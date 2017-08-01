@@ -15,7 +15,7 @@ export class SimulationActor extends Actor {
         this.hasDockingSpace = this.docked.length < this.docksTotalSize;
     }
 
-    calculateParams() {
+    recalculateBlocks() {
         this.blocks = [];
         this.blocksWithDocks = [];
 

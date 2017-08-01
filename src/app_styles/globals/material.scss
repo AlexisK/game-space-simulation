@@ -3,6 +3,9 @@
 @mixin mat-shadow() {
   box-shadow: 0 2px 5px $grey-2;
 }
+@mixin mat-shadow-dark() {
+  box-shadow: 0 2px 5px $grey-4;
+}
 
 @mixin mat-link() {
   color: $color-primary;

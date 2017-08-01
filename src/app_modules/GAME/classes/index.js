@@ -4,6 +4,7 @@ export * from './simulation-actor.class';
 export * from './actor-ai.class';
 export * from './ware.class';
 export * from './production-blueprint.class';
+export * from './block-type.class';
 export * from './block-blueprint.class';
 export * from './block.class';
 export * from './ship-type.class';

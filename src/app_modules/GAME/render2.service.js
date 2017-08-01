@@ -1,18 +1,14 @@
+import * as Dom from 'utils/dom';
 
 function createActor(actor) {
-    let element       = document.createElement('div');
-    element.className = 'ship ' + actor.blueprint.shipType.code;
+    let element       = Dom.cr('div', 'ship ' + actor.blueprint.shipType.code);
 
-    element.body           = document.createElement('img');
+    element.body           = Dom.cr('img', 'body', element);
     actor.blueprint.getImageData
         .then(({uri}) => element.body.src = uri);
-    element.body.className = 'body';
-    element.appendChild(element.body);
 
-    element.label             = document.createElement('div');
-    element.label.className   = 'label';
+    element.label             = Dom.cr('div', 'label', element);
     element.label.textContent = actor.blueprint.name;
-    element.appendChild(element.label);
 
     element.body.style.width = actor.blueprint.sizeX + 'px';
     element.body.style.height = actor.blueprint.sizeY + 'px';

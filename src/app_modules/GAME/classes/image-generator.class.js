@@ -20,8 +20,29 @@ export class ImageGenerator {
         return this.images.push(params);
     }
 
-    drawImage([url, x, y, angle]) {
+    drawImage([url, x, y, angle, sizeX, sizeY]) {
         return new Promise(resolve => {
+            let colorMap;
+
+            if ( url.indexOf('color:') === 0 ) {
+                colorMap = url.split(':');
+                if ( sizeX && sizeY ) {
+                    this.ctx.save();
+                    this.ctx.translate(this.sizeX2 + x, this.sizeY2 + y);
+                    this.ctx.rotate(angle);
+                    this.ctx.fillStyle = colorMap[1];
+                    this.ctx.fillRect(-sizeX/2, -sizeY/2, sizeX, sizeY);
+                    this.ctx.restore();
+                }
+            } else {
+                colorMap = [null, null, url];
+            }
+
+            if ( !colorMap[2] ) {
+                resolve();
+                return null;
+            }
+
             let img = new Image();
 
             img.onload = () => {
@@ -35,13 +56,15 @@ export class ImageGenerator {
                 this.ctx.restore();
                 resolve();
             };
-            img.src    = url;
+            img.src    = colorMap[2];
+
         });
 
     }
 
     clear() {
         this.ctx.clearRect(0, 0, this.sizeX, this.sizeY);
+        this.ctx.save();
     }
 
     generatePng() {

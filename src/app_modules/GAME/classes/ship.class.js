@@ -9,7 +9,7 @@ export class Ship extends ActorAi {
         this.blueprint  = blueprint;
         this.production = this.blueprint.production.map(bp => new Production(bp));
         this.production.forEach(production => production.ship = this);
-        this.calculateParams();
+        this.recalculateBlocks();
         this.normalize();
     }
 
