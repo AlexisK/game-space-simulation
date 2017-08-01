@@ -24,17 +24,6 @@ export class Block extends Actor {
         this.hasDockingSpace = this.docked.length < this.blueprint.dockSize;
     }
 
-    getAngle(target) {
-        let curPosition = this.getTarget(this);
-        return Math.atan2(target.y - curPosition.y, target.x - curPosition.x);
-    }
-
-    getDistance(target) {
-        let curPosition = this.getTarget(this);
-        return Math.sqrt(Math.pow(target.x - curPosition.x, 2) + Math.pow(target.y - curPosition.y, 2));
-    }
-
-
     requestDock(ship) {
         if ( this.hasDockingSpace ) {
             if ( this.getDistance(ship) <= config.dockingDistance ) {

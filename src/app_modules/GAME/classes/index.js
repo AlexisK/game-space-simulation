@@ -1,5 +1,6 @@
 export * from './actor.class';
 export * from './simulation-actor.class';
+export * from './actor-ai.class';
 export * from './ware.class';
 export * from './production-blueprint.class';
 export * from './block-blueprint.class';

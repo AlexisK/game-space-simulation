@@ -1,39 +1,90 @@
 import { Actor } from './actor.class';
+import { Block } from './block.class';
+import { removeFromList } from 'utils/helpers';
 
 export class SimulationActor extends Actor {
     constructor() {
         super();
-        this.actor  = null;
-        this.isExecutingAi = false;
-        this.aiPackage = null;
-        this.currentAiScript = null;
-        this.aiActionIndex = 0;
-        this.aiStack = {};
+        this.docked    = [];
+        this.inventory = [];
+        this.dockedTo  = null;
+    }
+
+    normalize() {
+        this.hasDock         = this.docksTotalSize > 0;
+        this.hasDockingSpace = this.docked.length < this.docksTotalSize;
+    }
+
+    calculateParams() {
+        this.blocks = [];
+        this.blocksWithDocks = [];
+
+        this.docksTotalSize = 0;
+        this.cargoTotalSize = 0;
+
+        this.blueprint.blocks.forEach(([blockBlueprint, x, y, angle]) => {
+            let block = new Block(this, blockBlueprint, {x, y, angle});
+            this.blocks.push(block);
+
+            if ( blockBlueprint.dockSize ) {
+                this.docksTotalSize += blockBlueprint.dockSize;
+                this.blocksWithDocks.push(block);
+            }
+            this.cargoTotalSize += blockBlueprint.cargo;
+        });
     }
 
     tick() {
-        if ( this.isExecutingAi ) {
-            this.currentAiScript();
-        } else if (this.aiPackage) {
-            this.aiPackage.run(this);
+
+    }
+
+
+    // Docking
+    requestDock(ship) {
+        if ( this.hasDockingSpace && this.getDistance(ship) <= this.dockRequestOffset ) {
+            for (let i = 0; i < this.blocksWithDocks.length; i++) {
+                if ( this.blocksWithDocks[i].hasDockingSpace ) {
+                    ship.target = this.blocksWithDocks[i];
+                    this.blocksWithDocks.push(this.blocksWithDocks.shift());
+                    return false;
+                }
+            }
+            return false;
         }
     }
 
-    stopExecutingAi() {
-        this.isExecutingAi = false;
+    _requestDock(ship) {
+        this.docked.push(ship);
+        this.hasDockingSpace = this.docked.length < this.docksTotalSize;
     }
 
-    executeAi(worker) {
-        this.isExecutingAi = true;
-        this.currentAiScript = () => {
-            worker(this.stopExecutingAi.bind(this));
-        };
+    _requestUndock(ship) {
+        removeFromList(this.docked, ship);
+        this.hasDockingSpace = this.docked.length < this.docksTotalSize;
     }
-    executeAiOnce(worker) {
-        this.isExecutingAi = true;
-        this.currentAiScript = () => {
-            worker(this.stopExecutingAi.bind(this));
-            this.currentAiScript = () => {};
-        };
+
+    dockTo(target) {
+        if ( this.dockedTo ) {
+            this.dockedTo.requestUndock(this);
+        }
+        return target.requestDock(this);
+    }
+
+    _dockTo(target) {
+        if ( this.sector ) {
+            this.sector.unregisterActor(this);
+        }
+        this.dockedTo = target;
+    }
+
+    undock() {
+        if ( this.dockedTo ) {
+            this.dockedTo.requestUndock(this);
+        }
+    }
+
+    _undock(sector) {
+        sector.registerActor(this, this.dockedTo);
+        this.dockedTo = null;
     }
 }
