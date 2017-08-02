@@ -34,16 +34,18 @@ export class ShipBlueprint {
             bottom = Math.min(bottom, y - y2);
             left   = Math.min(left, x - x2);
         });
-        this.sizeX = right - left;
-        this.sizeY = top - bottom;
+        //this.sizeX = right - left;
+        //this.sizeY = top - bottom;
+        this.sizeX = Math.max(right, -left)*2;
+        this.sizeY = Math.max(top, -bottom)*2;
 
         // calc center
-        this.offsetX = Math.round(((right + left) / 2) / config.gridStep);
-        this.offsetY = Math.round(((top + bottom) / 2) / config.gridStep);
-        this.blocks.forEach(params => {
-            params[1] -= this.offsetX;
-            params[2] -= this.offsetY;
-        });
+        //this.offsetX = Math.round(((right + left) / 2) / config.gridStep);
+        //this.offsetY = Math.round(((top + bottom) / 2) / config.gridStep);
+        //this.blocks.forEach(params => {
+        //    params[1] -= this.offsetX;
+        //    params[2] -= this.offsetY;
+        //});
 
     }
 
